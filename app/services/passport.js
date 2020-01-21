@@ -24,7 +24,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({
     clientID: '951689382043-h5qvb3jpmf2c3fbn0nadsh5ogl67nunk.apps.googleusercontent.com',
     clientSecret: 'vjUmYtRLL0---IusLgIiOEWr',
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    callbackURL: 'http://api.issuetrackingtool.buzz/auth/google/callback',
     proxy: true
 }, async (accessToken, refreshToken, profile, done) => {
     for (let x of profile.emails) {
@@ -44,24 +44,7 @@ passport.use(new GoogleStrategy({
         })
 
         newUser.save()
-       let token= token.generateToken(newUser,(err,tokenDetails)=>{
-            tokenDetails.userId = newUser.userId
-            tokenDetails.userDetails = newUser
-            return tokenDetails;
-        })
-        const existingUser = await AuthModel.findOne({userId:profile.id})
-        if(existingUser){
-            done(null,existingUser)
-        }
-        else{
-            let newAuthToken = new AuthModel({
-                userId: token.userId,
-                authToken: token.token,
-                tokenSecret: token.tokenSecret,
-                tokenGenerationTime: time.now()
-            })
-            newAuthToken.save()
-        }
+    
         
         done(null,newUser)
 

@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require("./../../app/controllers/userController");
 const appConfig = require("./../../config/appConfig")
 const passport = require('passport')
-
+const auth = require('../middlewares/auth')
 module.exports.setRouter = (app) => {
 
     let baseUrl = `${appConfig.apiVersion}/users`;
@@ -15,7 +15,9 @@ module.exports.setRouter = (app) => {
 
     app.post(`${baseUrl}/sociallogin`,userController.socialLogin);
 
-    app.post(`${baseUrl}/logout`, userController.logout);
+    app.post(`${baseUrl}/logout`,userController.logout);
+    
+    app.get(`${baseUrl}/logoutgoogle`,userController.logoutgoogle);
 
     app.get(`${baseUrl}/view/all`,  userController.getAllUser);
 

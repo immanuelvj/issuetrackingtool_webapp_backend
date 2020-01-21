@@ -272,7 +272,10 @@ let logout = (req, res) => {
   })
 }  // end of the logout function.
 
-
+let logoutgoogle = (req,res) =>{
+    let apiResponse = response.generate(false,'Logged out sucessfully',200,null)
+    res.send(apiResponse)
+}
 socialLogin = () => {
 
 }
@@ -328,6 +331,7 @@ module.exports = {
     logout: logout,
     socialLogin:socialLogin,
     getAllUser:getAllUser,
-    getSingleUser:getSingleUser
+    getSingleUser:getSingleUser,
+    logoutgoogle:logoutgoogle
 
 }// end exports

@@ -9,6 +9,7 @@
   "author": "Immanuel Jeo Sherin VJ <immanueljeosherinvj@gmail.com>",
   "license": "",
   "dependencies": {
+    "apidoc": "^0.20.0",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",

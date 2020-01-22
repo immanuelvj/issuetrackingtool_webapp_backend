@@ -21,7 +21,7 @@ const models = [require('./app/models/User'),
 const morgan = require('morgan');
 const passport = require('passport')
 const social = require('./app/services/passport');
-
+const cookieSession = require('cookie-session');
 app.use(morgan('dev'));
 
 app.use(bodyParser.json({limit:'50mb'}));
@@ -33,6 +33,12 @@ app.use(globalErrorMiddleware.globalErrorHandler);
 
 app.use(express.static(path.join(__dirname, 'client')));
 
+app.use(cookieSession({
+  name:'googleauthToken',
+  maxAge:24*60*60*1000,
+  keys:["jdsahkjasdkjdasnkj"],
+  httpOnly:false
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
